@@ -25,3 +25,4 @@ urllib3==2.6.2
 yarl==1.22.0
 youtube-search==2.2.0
 yt-dlp==2025.12.8
+pyNaCl==1.6.2
