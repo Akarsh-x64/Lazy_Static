@@ -34,7 +34,7 @@ def after_song_playlist(error=None):
 
 def search(keyword, num=1, tosave="lazy_static"):
     try:
-        cid, secret = '<spotify client id here>', '<spotify client secret here>'
+        cid, secret = 'fe4a0deda069424884872241d1b8a1a4', '37ca85cc33254c51b3b7bf9626d54d06'
         search = keyword
         client_credentials_manager = SpotifyClientCredentials(client_id=cid, client_secret=secret)
         sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
@@ -228,14 +228,16 @@ async def play_playlist(ctx, name):
         pass
     if ctx.message.author.voice:
         channel = ctx.message.author.voice.channel
+        print(channel)
         try:
             await channel.connect()
             await ctx.guild.change_voice_state(channel=channel, self_mute=False, self_deaf=True)
-        except Exception:
-            pass
+        except Exception as e:
+            print(e)
         song = playQueue.pop(0)
         playQueue.append(song)
         voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
+        print(voice)
         voice.play(discord.FFmpegPCMAudio(song), after=after_song_playlist)
 
 
